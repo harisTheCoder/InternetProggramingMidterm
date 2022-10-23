@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- Sticky header -->
+    <div class="header" id="myHeader">
+        <img src="logo/noBackGround.png" alt="Logo" style="max-width: 10%;">
+        <h2>My Header</h2>
+        <div class="header-right">
+          <a class="active" href="#home">Home</a>
+          <a href="#about">About</a>
+        </div>
+    </div>
+
+    <!-- Title -->
+    <h1 Style="text-align: center;"> My Favorite Movies</h1>
+
+    <!-- Form -->
+    <div class="form">
+        <label for="mvetitle"> Movie Title: </label>
+        <input id="mvetitle" type="text" placeholder="Movie Title" required>
+        <label for="rating"> Rating </label>
+        <input id="rating" type="number" min="0" max="10" step="1" placeholder="Give a Rating From 0 to 10" required>
+        <button id="btn" class="addmve">Add Movie</button>
+    </div>
+
+    <!-- Table -->
+    <div class="table">
+        <table id="movietable">
+        </table>
+    </div>
+</body>
+
+<script>
+    //2DList that contains movies 
+    var movieList = [];
+
+    //At start initialize table
+    $(document).ready(function () {
+
+        updateTable();
+
+    });
+
+    //When the button is clicked add the movie to the list
+    $("#btn").click(function () {
+        var usermovie = $("#mvetitle").val();
+        var userrating = $("#rating").val();
+        movieList.unshift([usermovie, userrating]);
+        updateTable();
+    });
+
+    //When sort next to name is clicked sort the list name
+    $('table').on('click', '.sortByName', function (e) {
+        e.preventDefault();
+        movieList.sort(function (a, b) {
+            if (a[0] === b[0]) {
+                return 0;
+            }
+            else {
+                return (a[0] < b[0]) ? -1 : 1;
+            }
+        });
+        updateTable();
+    });
+
+    //When sort next to rating is clicked sort the list by rating
+    $('table').on('click', '.sortByRating', function (e) {
+        e.preventDefault();
+        movieList.sort(function (a, b) {
+            return -(a[1] - b[1]);
+        });
+        updateTable();
+    });
+
+    //When delete is clicked remove that item from the list
+    $('table').on('click', '.deletebtn', function (e) {
+        e.preventDefault();
+        movieList.splice(parseInt(event.target.id), 1);
+        updateTable();
+    });
+
+    //Updates the table to reflect the list
+    function updateTable() {
+        $('#movietable').empty();
+        $('#movietable').append('<tr id="default"><th class="title">Movie name  <button type="button" class="sortByName">Sort</button></th><th>Rating  <button type="button" class="sortByRating">Sort</button></th><th>Delete</th></tr>');
+        for (i = 0; i < movieList.length; i++) {
+            $('#movietable').append('<tr><td>' + movieList[i][0] + ' </td><td>' + movieList[i][1] + '</td> <td><button id = "' + i + '" class = "deletebtn"> delete </button> </td></tr>');
+        }
+    }
+</script>
+<script src="header.js"></script>
+
+</html>

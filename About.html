@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#jaden").hide();
+            $("#harisButton").click(function () {
+                $("#jaden").show();
+                $("#haris").hide();
+            });
+            $("#jadenButton").click(function () {
+                $("#jaden").hide();
+                $("#haris").show();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>About us</h1>
+
+    <div class=card id="hari">
+        <h2>Charalampos Chastoukis</h2>
+        <img src="harisImage.jpg" alt="Image of Charalampos Chastoukis" style="max-width: 25%;">
+        <p>Haris is a passionate proggramer working on this project</p>
+        <button type="button" id="harisButton">Next</button>
+    </div>
+    <div class=card id="jaden">
+        <h2>Jaden Smith</h2>
+        <img src="harisImage.jpg" alt="Image of Charalampos Chastoukis" style="max-width: 25%;">
+        <p>Haris is a passionate proggramer working on this project</p>
+        <button type="button" id="jadenButton">Next</button>
+    </div>
+</body>
+
+</html>
